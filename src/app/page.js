@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Home() {
   const read = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/users`);
+      const response = await axios.get(`/users`);
 
       if (response.status === 200) {
         console.log(response.data.data);
@@ -18,7 +18,7 @@ export default function Home() {
 
   const write = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/users`, {
+      const response = await axios.post(`/users`, {
         data: {
           name: "Danny",
         },
