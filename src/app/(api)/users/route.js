@@ -29,15 +29,17 @@ export async function POST(req) {
 
   try {
     const { data } = await req.json();
-    console.log("data: ", data);
 
     database.push(data);
 
-    console.log("nach pusch");
+    const write = await writeDatabase(database);
 
-    writeDatabase(database);
-
-    console.log("nach schreiben");
+    console.log(write);
+    if (write) {
+      console.log("Ja");
+    } else {
+      console.log("Nein");
+    }
 
     return NextResponse.json(
       {
@@ -48,6 +50,14 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    return NextResponse.json({ message: "keine verbindung" }, { status: 400 });
+    console.error("Fehler: ", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Ein Fehler ist aufgetreten",
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }

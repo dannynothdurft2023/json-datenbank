@@ -16,4 +16,5 @@ export function readDatabase() {
 export function writeDatabase(data) {
   const json = JSON.stringify(data, null, 2);
   fs.writeFileSync(dbPath, json, "utf-8");
+  return true;
 }
