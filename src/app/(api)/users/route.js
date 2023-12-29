@@ -29,17 +29,8 @@ export async function POST(req) {
 
   try {
     const { data } = await req.json();
-
     database.push(data);
-
-    const write = await writeDatabase(database);
-
-    console.log(write);
-    if (write) {
-      console.log("Ja");
-    } else {
-      console.log("Nein");
-    }
+    writeDatabase(database);
 
     return NextResponse.json(
       {
@@ -50,7 +41,6 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Fehler: ", error);
     return NextResponse.json(
       {
         success: false,
