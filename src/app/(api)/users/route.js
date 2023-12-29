@@ -29,11 +29,15 @@ export async function POST(req) {
 
   try {
     const { data } = await req.json();
+    console.log("data: ", data);
 
     database.push(data);
+
+    console.log("nach pusch");
+
     writeDatabase(database);
 
-    console.log(data);
+    console.log("nach schreiben");
 
     return NextResponse.json(
       {
